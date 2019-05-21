@@ -13,6 +13,7 @@ export interface ParserOptions {
   sortKey?: string;
   skipKey?: string;
   limitKey?: string;
+  pageKey?: string;
   filterKey?: string;
 }
 
@@ -21,11 +22,12 @@ export interface QueryOptions {
   sort?: string | Object; // ie.: { field: 1, field2: -1 }
   limit?: number;
   skip?: number;
+  page?: number;
   select?: string | Object; // ie.: { field: 0, field2: 0 }
   populate?: string | Object; // path(s) to populate:  a space delimited string of the path names or array like: [{path: 'field1', select: 'p1 p2'}, ...]
 }
 
-export class MongooseQueryParser {
+export class QueryParser {
   private readonly defaultDateFormat = [Moment.ISO_8601];
 
   private readonly builtInCaster = {
@@ -47,6 +49,7 @@ export class MongooseQueryParser {
     { operator: 'skip', method: this.castSkip, defaultKey: 'skip' },
     { operator: 'limit', method: this.castLimit, defaultKey: 'limit' },
     { operator: 'filter', method: this.castFilter, defaultKey: 'filter' },
+    { operator: 'page', method: this.castPage, defaultKey: 'page' }
   ];
 
   constructor(private options: ParserOptions = {}) {
@@ -327,6 +330,17 @@ export class MongooseQueryParser {
    */
   private castLimit(limit: string) {
     return Number(limit);
+  }
+
+    /**
+   * cast page query to object like
+   * page=1
+   * =>
+   * {page: 1}
+   * @param limit
+   */
+  private castPage(page: string) {
+    return Number(page);
   }
 
   /**
