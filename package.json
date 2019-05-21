@@ -2,9 +2,15 @@
   "name": "@cmddevelop/query-parameters",
   "version": "1.0.0",
   "description": "Translates URL query parameters for Mongoose, Express, and MongoDb",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf lib",
+    "compile": "npm run clean && tsc",
+    "prepublishOnly": "npm run compile",
+    "pretest": "npm run compile",
+    "test": "mocha ./lib/**/*.spec.js",
+    "lint": "tslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -16,12 +22,31 @@
     "express",
     "URL",
     "query",
-    "API"
+    "API",
+    "parser",
+    "querystring"
   ],
   "author": "CMD Develop LLC",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cmddevelopllc/query-parameters/issues"
   },
-  "homepage": "https://github.com/cmddevelopllc/query-parameters#readme"
+  "homepage": "https://github.com/cmddevelopllc/query-parameters#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/lodash": "^4.14.116",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.4",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "mocha-typescript": "^1.1.17",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2"
+  }
 }
