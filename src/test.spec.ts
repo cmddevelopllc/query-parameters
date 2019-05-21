@@ -1,13 +1,13 @@
 import { suite, test } from 'mocha-typescript';
 import { assert } from 'chai';
 
-import { MongooseQueryParser } from './';
+import { QueryParser } from './';
 
 @suite('Tester')
 class Tester {
   @test('should parse general query')
   generalParse() {
-    let parser = new MongooseQueryParser();
+    let parser = new QueryParser();
     let qry = 'date=2016-01-01&boolean=true&integer=10&regexp=/foobar/i&null=null';
     let parsed = parser.parse(qry);
     assert.isNotNull(parsed.filter);
@@ -20,12 +20,12 @@ class Tester {
 
   @test('should parse query with string templates')
   generalParse2() {
-    const parser = new MongooseQueryParser();
+    const parser = new QueryParser();
     const predefined = {
       vip: { name: { $in: ['Google', 'Microsoft', 'NodeJs'] } },
       sentStatus: 'sent'
     };
-    const parsed = parser.parse('${vip}&status=${sentStatus}&timestamp>2017-10-01&author.firstName=/john/i&limit=100&skip=50&sort=-timestamp&select=name&populate=children', predefined);
+    const parsed = parser.parse('${vip}&status=${sentStatus}&timestamp>2017-10-01&author.firstName=/john/i&limit=100&skip=50&sort=-timestamp&select=name&populate=children&page=1', predefined);
     assert.isOk(parsed.filter['status'] === predefined.sentStatus);
     assert.isOk(parsed.filter['name'].$in.length === 3);  // checking parsing of ${vip}
     assert.isOk(parsed.filter['timestamp']['$gt'] instanceof Date);
@@ -35,11 +35,12 @@ class Tester {
     assert.isNotNull(parsed.sort);
     assert.isNotNull(parsed.select);
     assert.isNotNull(parsed.populate);
+    assert.isOk(parsed.page === 1);
   }
 
   @test('should parse populate query')
   async populateParse() {
-    let parser = new MongooseQueryParser();
+    let parser = new QueryParser();
     let qry = '_id=1&populate=serviceSalesOrders,customer.category,customer.name';
     let parsed = parser.parse(qry);
     assert.isOk((parsed.populate as any).length === 2);
@@ -47,7 +48,7 @@ class Tester {
 
   @test('should parse built in casters')
   builtInCastersTest() {
-    let parser = new MongooseQueryParser();
+    let parser = new QueryParser();
     let qry = 'key1=string(10)&key2=date(2017-10-01)&key3=string(null)';
     let parsed = parser.parse(qry);
     assert.isOk(typeof parsed.filter['key1'] === 'string');
@@ -57,7 +58,7 @@ class Tester {
 
   @test('should parse custom caster')
   parseCaster() {
-    let parser = new MongooseQueryParser({ casters: { $: val => '$' + val } });
+    let parser = new QueryParser({ casters: { $: val => '$' + val } });
     let qry = '_id=$(1)';
     let parsed = parser.parse(qry);
     assert.equal('$1', parsed.filter['_id']);
@@ -65,7 +66,7 @@ class Tester {
 
   @test('should parse json filter')
   parseJsonFilter() {
-    let parser = new MongooseQueryParser();
+    let parser = new QueryParser();
     let obj = {
       $or: [
         { key1: 'value1' },
@@ -80,7 +81,7 @@ class Tester {
 
   @test('should parse predefined query objects')
   parsePredefined() {
-    let parser = new MongooseQueryParser();
+    let parser = new QueryParser();
     let preDefined = {
       isActive: { status: { $in: ['In Progress', 'Pending'] } },
       vip: ['KFC', 'Google', 'MS'],

@@ -12,6 +12,7 @@ export interface ParserOptions {
     sortKey?: string;
     skipKey?: string;
     limitKey?: string;
+    pageKey?: string;
     filterKey?: string;
 }
 export interface QueryOptions {
@@ -19,10 +20,11 @@ export interface QueryOptions {
     sort?: string | Object;
     limit?: number;
     skip?: number;
+    page?: number;
     select?: string | Object;
     populate?: string | Object;
 }
-export declare class MongooseQueryParser {
+export declare class QueryParser {
     private options;
     private readonly defaultDateFormat;
     private readonly builtInCaster;
@@ -92,6 +94,14 @@ export declare class MongooseQueryParser {
      * @param limit
      */
     private castLimit;
+    /**
+   * cast page query to object like
+   * page=1
+   * =>
+   * {page: 1}
+   * @param page
+   */
+    private castPage;
     /**
      * transform predefined query strings defined in query string to the actual query object out of the given context
      * @param query

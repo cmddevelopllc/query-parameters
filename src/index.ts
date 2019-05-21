@@ -337,7 +337,7 @@ export class QueryParser {
    * page=1
    * =>
    * {page: 1}
-   * @param limit
+   * @param page
    */
   private castPage(page: string) {
     return Number(page);
