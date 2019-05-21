@@ -1,0 +1,27 @@
+{
+  "name": "@cmddevelop/query-parameters",
+  "version": "1.0.0",
+  "description": "Translates URL query parameters for Mongoose, Express, and MongoDb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmddevelopllc/query-parameters.git"
+  },
+  "keywords": [
+    "mongoose",
+    "mongoDb",
+    "express",
+    "URL",
+    "query",
+    "API"
+  ],
+  "author": "CMD Develop LLC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmddevelopllc/query-parameters/issues"
+  },
+  "homepage": "https://github.com/cmddevelopllc/query-parameters#readme"
+}
