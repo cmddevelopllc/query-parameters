@@ -1,6 +1,6 @@
 {
   "name": "@cmddevelop/query-parameters",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "Translates URL query parameters for Mongoose, Express, and MongoDb",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

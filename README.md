@@ -1,4 +1,4 @@
-# query-parameters
+# @cmddevelop/query-parameters
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][download-badge]][npm-url]
@@ -72,3 +72,6 @@ For more advanced usage (`$or`, `$type`, `$elemMatch`, etc.), pass any MongoDB q
 - Useful to limit the number of records returned
 - Default operator keys are `skip` or `page`, and `limit`
 
+[npm-url]: https://www.npmjs.com/package/@cmddevelop/query-parameters
+[npm-image]: https://img.shields.io/npm/v/@cmddevelop/query-parameters.svg?style=flat-square
+[download-badge]: https://img.shields.io/npm/dm/@cmddevelop/query-parameters.svg?style=flat-square
