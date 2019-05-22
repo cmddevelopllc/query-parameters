@@ -10,7 +10,7 @@ This library was build using this [mongoose-query-parser](https://github.com/leo
 ## Features
 
 - Supports the most of MongoDB operators (`$in`, `$regexp`, `$exists`) and features including skip, sort, limit, population
-- Additionally, there is a key word of `page` that can be applied in order to work with [@cmddevelop/mongoose-paginate]
+- Additionally, there is a key word of `page` that can be applied in order to work with [mongoose-paginate](https://www.npmjs.com/package/mongoose-paginate)
 - Auto type casting of `Number`, `RegExp`, `Date`, `Boolean` and `null`
 - String templates/predefined queries (i.e. `firstName=${my_vip_list}`)
 - Allows customization of keys and options in query string

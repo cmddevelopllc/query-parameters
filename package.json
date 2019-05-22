@@ -1,6 +1,6 @@
 {
   "name": "@cmddevelop/query-parameters",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Translates URL query parameters for Mongoose, Express, and MongoDb",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -10,7 +10,8 @@
     "prepublishOnly": "npm run compile",
     "pretest": "npm run compile",
     "test": "mocha ./lib/**/*.spec.js",
-    "lint": "tslint src/**/*.ts"
+    "lint": "tslint src/**/*.ts",
+    "publish":"npm publish --access public"
   },
   "repository": {
     "type": "git",
